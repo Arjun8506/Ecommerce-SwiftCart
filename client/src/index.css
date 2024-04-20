@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: headingFont;
+    src: url("./assests/Lato/Lato-LightItalic.ttf");
+}
+@font-face {
+    font-family: linkFont;
+    src: url("./assests/Lato/Lato-BoldItalic.ttf");
+}
+
+.h1inswiper{
+    font-family: headingFont;
+    font-weight: 900;
+}
+.linkofmenu{
+    font-family: linkFont;
+}
