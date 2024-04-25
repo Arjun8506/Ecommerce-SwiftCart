@@ -34,13 +34,12 @@ const About = () => {
   ]
 
   return (
-    <div className='pt-24 w-full min-h-screen px-2 bg-orange-400'>
+    <div className='pt-24 w-full min-h-screen px-2'>
       
       {aboutPageData.map((data, index) => (
         <div className= {`flex flex-col text-white pb-5 items-center ${index === 6 && ""}`} key={index}>
           <h1 className='mb-4 uppercase font-bold text-xl text-purple-500'>{data.h1}</h1>
           <p className='text-center'>{data.p}</p>
-          console.log({index});
         </div>
       ))}
 

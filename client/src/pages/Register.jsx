@@ -18,7 +18,7 @@ const Register = () => {
   }
 
   return (
-    <div className="pt-20 w-full min-h-screen px-2 bg-orange-400 pb-10">
+    <div className="pt-20 w-full min-h-screen px-2  pb-10">
       <div className="text-black flex flex-col items-center gap-2 py-5 ">
         <h1 className="font-bold text-xl">Join SwiftCart Today!</h1>
         <p className="text-center">

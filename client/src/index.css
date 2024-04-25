@@ -11,6 +11,15 @@
     src: url("./assests/Lato/Lato-BoldItalic.ttf");
 }
 
+@font-face {
+    font-family: fontforall;
+    src: url("./assests/Lato/Lato-Regular.ttf");
+}
+
+body{
+    font-family: fontforall;
+}
+
 .h1inswiper{
     font-family: headingFont;
     font-weight: 900;
@@ -18,3 +27,4 @@
 .linkofmenu{
     font-family: linkFont;
 }
+

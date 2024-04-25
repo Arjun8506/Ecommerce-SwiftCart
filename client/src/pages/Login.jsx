@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useLogin } from "../hooks/useLogin";
+import GoogleOuth from "../components/GoogleOuth";
 
 const Login = () => {
 
@@ -18,7 +19,7 @@ const Login = () => {
   }
 
   return (
-    <div className="pt-20 w-full min-h-screen px-2 bg-orange-400 pb-10">
+    <div className="pt-20 w-full min-h-screen px-2 pb-16">
 
         <div className="text-black flex flex-col items-center gap-2 py-5 ">
       <h1 className="font-bold text-xl">Welcome Back to SwiftCart!</h1>
@@ -73,7 +74,7 @@ const Login = () => {
       </div>
       ) : ""}
 
-      <button type="button" className="btn btn-primary w-full my-4 text-lg text-white">Continue With Google</button>
+      <GoogleOuth />
 
       <p className="text-sm text-center">Don't Have an Account? <Link to={"/register"} className="link link-primary" >Register</Link></p>
     </div>

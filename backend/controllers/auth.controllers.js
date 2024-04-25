@@ -41,3 +41,16 @@ export const loginUser = async (req, res, next) => {
         next(error)
     }
 }
+
+export const logoutUser = async (req, res, next) => {
+    try {
+        res.clearCookie("shopingCookie")
+        res.cookie("clearCookie", "", { maxAge: 0, httpOnly: true}).status(200).json({
+            success: true,
+            statusCode: 200,
+            message: "Logout Successful"
+        })
+    } catch (error) {
+        next(error)
+    }
+}

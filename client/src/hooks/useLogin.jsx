@@ -16,6 +16,7 @@ export const useLogin = () => {
         setloading(true)
         try {
             const res = await axios.post("http://localhost:3000/api/auth/login", formData)
+
             console.log(res);
             
             if (res.data.success === false) {
@@ -33,7 +34,6 @@ export const useLogin = () => {
             
         } catch (error) {
             setloading(false)
-            console.log(error);
             seterror(error.message)
         }
     }
