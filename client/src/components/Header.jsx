@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaSearch, FaShoppingCart } from "react-icons/fa";
 import { CgMenuGridR } from "react-icons/cg";
@@ -18,7 +18,7 @@ const Header = () => {
   };
 
   const [toggleDrop, settoggleDrop] = useState(false);
-
+  
   const toggleDropDown = () => {
     settoggleDrop(!toggleDrop);
     return;
@@ -41,16 +41,18 @@ const Header = () => {
           </Link>
         </div>
         <div className="flex gap-2">
-          <button className="btn text-xl bg-orange-600 text-white  rounded-lg ">
-            <FaCartPlus />
-          </button>
+          <Link to={"/cart"}>
+            <button className="btn text-xl bg-orange-600 text-white  rounded-lg ">
+              <FaCartPlus />
+            </button>
+          </Link>
           <button
             className="btn text-xl bg-orange-600 text-white  rounded-lg "
             onClick={toggleMenu}
           >
             {isVisible ? <RiDeleteBack2Fill /> : <CgMenuGridR />}
           </button>
-          
+
           {authUser ? (
             <div className="w-12 h-12 overflow-hidden ">
               <img
@@ -76,12 +78,6 @@ const Header = () => {
           className="btn bg-orange-500 text-white w-full mb-2"
         >
           my profile
-        </Link>
-        <Link
-          to={"/myorder"}
-          className="btn bg-orange-500 text-white w-full mb-2"
-        >
-          my order
         </Link>
         <Logout />
       </div>

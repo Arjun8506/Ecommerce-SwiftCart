@@ -14,6 +14,7 @@ dotenv.config()
 const Port = process.env.PORT || 5000
 
 app.use("/api/auth", authRoutes)
+app.use("/api/product", productRoutes)
 
 
 app.use((err, req, res, next) => {
