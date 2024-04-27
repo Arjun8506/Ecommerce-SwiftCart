@@ -18,7 +18,7 @@ const Header = () => {
   };
 
   const [toggleDrop, settoggleDrop] = useState(false);
-  
+
   const toggleDropDown = () => {
     settoggleDrop(!toggleDrop);
     return;
@@ -27,38 +27,34 @@ const Header = () => {
   return (
     <header>
       <div
-        className="w-full py-4 flex items-center justify-between px-2 overflow-hidden absolute top-0 z-50 bg-[rgba( 255, 255, 255, 0.15 )]
-        bg-opacity-15 bg-white backdrop-blur-4.5 shadow-lg rounded-b-lg border border-opacity-18 border-b-white
+        className="w-full py-6 flex items-center justify-between px-2 overflow-hidden absolute top-0 z-50 
         "
       >
-        <div className="">
+        <div className="text-purple-950 text-center uppercase">
           <Link to={"/"}>
-            <img
-              src={logo}
-              alt="logo"
-              className="w-14 h-14 object-cover rounded-full"
-            />
+            <h1 className="text-2xl font-extrabold">SwiftCart</h1>
+            <p className="text-xs font-semibold">Online Shop</p>
           </Link>
         </div>
         <div className="flex gap-2">
-          <Link to={"/cart"}>
-            <button className="btn text-xl bg-orange-600 text-white  rounded-lg ">
+          <button className="text-xl bg-orange-600 text-white  rounded-lg p-1">
+            <Link to={"/cart"}>
               <FaCartPlus />
-            </button>
-          </Link>
+            </Link>
+          </button>
           <button
-            className="btn text-xl bg-orange-600 text-white  rounded-lg "
+            className="text-xl bg-orange-600 text-white  rounded-lg p-1"
             onClick={toggleMenu}
           >
             {isVisible ? <RiDeleteBack2Fill /> : <CgMenuGridR />}
           </button>
 
           {authUser ? (
-            <div className="w-12 h-12 overflow-hidden ">
+            <div className="w-8 h-8 overflow-hidden ">
               <img
                 src={authUser?.profilePic}
                 alt="profilepic"
-                className="w-full h-full object-cover rounded-lg border-2 border-black/20"
+                className="w-full h-full object-cover rounded-full border-2 border-black/20"
                 onClick={toggleDropDown}
               />
             </div>
@@ -79,6 +75,14 @@ const Header = () => {
         >
           my profile
         </Link>
+        {authUser?.isAdmin === true && (
+          <Link
+            to={"/isadmin/create"}
+            className="btn bg-orange-500 text-white w-full mb-2"
+          >
+            Create Product
+          </Link>
+        )}
         <Logout />
       </div>
 

@@ -4,6 +4,7 @@ import cors from "cors"
 
 // Import of Files 
 import authRoutes from "./routes/auth.routes.js"
+import productRoutes from "./routes/product.route.js"
 import connectToDatabase from "./connectToDB/connectToDb.js"
 
 const app = express()

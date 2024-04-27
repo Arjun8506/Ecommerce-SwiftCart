@@ -4,8 +4,8 @@ import { createProduct, getAllProducts } from "../controllers/product.controller
 
 const router = Router()
 
-router.post("/create", loggedInUser, createProduct)
+router.post("/create", createProduct)
 
-router.get("/create", getAllProducts)
+router.get("/allproducts", getAllProducts)
 
 export default router

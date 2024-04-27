@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay, EffectCards } from "swiper/modules";
+import background from "../assests/background2.jpg"
 
 // Import Swiper styles
 import "swiper/css";
@@ -15,6 +16,7 @@ import mobileslide1 from "../assests/mobileslide1.jpg";
 import mobileslide2 from "../assests/mobileslide2.jpg";
 import mobileslide3 from "../assests/mobileslide3.jpg";
 import mobileslide4 from "../assests/mobileslide4.jpg";
+import { Link } from "react-router-dom";
 
 export const HeroSection = () => {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
@@ -32,8 +34,8 @@ export const HeroSection = () => {
   }, []);
 
   return (
-    <div className="max-w-full h-[100vh] bg-gray-100/50">
-      <Swiper
+    <div className="max-w-full h-fit -z-50">
+      {/* <Swiper
         spaceBetween={0}
         slidesPerView={1}
         grabCursor={false}
@@ -92,7 +94,17 @@ export const HeroSection = () => {
             </div>
           </div>
         </SwiperSlide>
-      </Swiper>
+      </Swiper> */}
+
+        <div className="w-full h-96">
+      <img src={slide1} alt="" className=" w-full h-full object-cover aspect-auto" />
+        </div>
+        <div className="w-full h-96 text-purple-950 text-sm font-semibold px-2 absolute top-0 flex flex-col items-start justify-end pb-16">
+          <h1 className="mb-5 text-xl uppercase font-extrabold">Just Sit back and <br /> let us do the work <br /> for you!</h1>
+          <button className="font-bold p-2 px-3 bg-orange-600 text-white rounded-lg hover:opacity-80 text-lg">
+            <Link to={"/shop"}>Shop Now</Link>
+          </button>
+        </div>
     </div>
   );
 };

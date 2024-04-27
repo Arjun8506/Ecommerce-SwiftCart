@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 import Header from "./components/Header";
 import Home from "./pages/Home";
@@ -13,10 +18,12 @@ import Footer from "./components/Footer";
 import Profile from "./pages/Profile";
 import { useAuthContext } from "./context/AuthContext";
 import Cart from "./pages/Cart";
+import CreateProduct from "./pages/CreateProduct";
 
 const App = () => {
+  const { authUser } = useAuthContext();
 
-  const { authUser } = useAuthContext()
+  console.log(authUser);
 
   return (
     <Router>
@@ -28,9 +35,15 @@ const App = () => {
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/cart" element={authUser ? <Cart /> : <Navigate to={"/login"}/>} />
+        <Route
+          path="/cart"
+          element={authUser ? <Cart /> : <Navigate to={"/login"} />}
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        {authUser?.isAdmin === true && (
+          <Route path="/isadmin/create" element={<CreateProduct />} />
+        )}
       </Routes>
       <Footer />
     </Router>

@@ -18,11 +18,11 @@ const Home = () => {
   ]
 
   return (
-    <div className="bg-gray-900 w-full min-h-screen text-white">
+    <div className="w-full min-h-screen bg-slate-100">
       <HeroSection />
       <Products />
 
-      <h1 className="text-xl my-5 px-2 underline font-extrabold">More Products From Us</h1>
+      <h1 className="text-xl px-2 underline font-extrabold">More Products From Us</h1>
 
       <div className="w-full min-h-screen grid grid-cols-3 gap-4 p-2">
       {imageData.map((img, index) => (
