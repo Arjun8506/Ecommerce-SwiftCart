@@ -81,7 +81,7 @@ const AdminUsersPage = () => {
   return (
     <section>
       <SidePanel />
-      <div className="w-full px-5 mb-24 py-24">
+      <div className="w-full px-5 mb-24 py-24 overflow-x-auto">
         <table {...getTableProps()} className="w-full horizontal">
           <thead>
             {headerGroups.map((headerGroup) => (

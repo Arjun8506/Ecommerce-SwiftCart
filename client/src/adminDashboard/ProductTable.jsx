@@ -64,7 +64,7 @@ const ProductTable = ({ products, onDelete }) => {
   );
 
   return (
-    <div className="w-full px-5 mb-24 overflow-x-hidden">
+    <div className="w-full px-5 mb-24 overflow-x-auto">
       <table {...getTableProps()} className="w-full horizontal">
         <thead>
           {headerGroups.map((headerGroup) => (

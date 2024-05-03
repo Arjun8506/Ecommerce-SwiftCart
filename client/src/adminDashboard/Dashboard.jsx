@@ -34,26 +34,26 @@ const Dashboard = () => {
     <section>
       <SidePanel />
       <div className="w-full min-h-screen pt-24 bg-slate-100 flex items-center">
-        <div className="w-full min-h-screen rounded-l-md px-5">
+        <div className="w-full min-h-screen rounded-l-md ">
           <div className="w-full h-fit bg-orange-500 flex items-center flex-col py-1 text-white">
             <h1>Total Sale Amount : </h1>
             <p>$14,200,528</p>
           </div>
-          <div className="w-full h-fit flex items-center justify-around py-4">
+          <div className="w-full h-fit flex items-center justify-around py-4 px-5">
             <Link to={"/admin/products"}>
-              <div className="w-24 h-24 bg-purple-500 hover:bg-cyan-600 text-white rounded-full flex flex-col items-center justify-center transition-all ease-in-out">
+              <div className="w-20 h-20 bg-purple-500 hover:bg-cyan-600 text-white rounded-full flex flex-col items-center justify-center transition-all ease-in-out">
                 <h2>Products</h2>
                 <h2>{count?.product}</h2>
               </div>
             </Link>
-            <Link to={"/admin/orders"}>
-              <div className="w-24 h-24 bg-purple-500 hover:bg-cyan-600 text-white rounded-full flex flex-col items-center justify-center transition-all ease-in-out">
+            <Link to={"/admin/users"}>
+              <div className="w-20 h-20 bg-purple-500 hover:bg-cyan-600 text-white rounded-full flex flex-col items-center justify-center transition-all ease-in-out">
                 <h2>Users</h2>
                 <h2>{count?.user}</h2>
               </div>
             </Link>
-            <Link to={"/admin/users"}>
-              <div className="w-24 h-24 bg-purple-500 hover:bg-cyan-600 text-white rounded-full flex flex-col items-center justify-center transition-all ease-in-out">
+            <Link to={"/admin/orders"}>
+              <div className="w-20 h-20 bg-purple-500 hover:bg-cyan-600 text-white rounded-full flex flex-col items-center justify-center transition-all ease-in-out">
                 <h2>Orders</h2>
                 <h2>{count?.order}</h2>
               </div>

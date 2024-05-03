@@ -14,7 +14,7 @@ const Shop = () => {
 
   const [isVisible, setisVisible] = useState(false);
 
-  const toggleSortMenu = () => setisVisible(!isVisible)
+  const toggleSortMenu = () => setisVisible(!isVisible);
 
   return (
     <div className="w-full min-h-screen pt-28 pb-10 px-2 bg-slate-100">
@@ -72,9 +72,9 @@ const Shop = () => {
       {loading ? (
         <p className="mb-5 text-center text-xl">Loading</p>
       ) : (
-        <div className="w-full grid grid-cols-2 gap-2 px-2">
+        <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-2 px-2">
           {products?.length > 10
-            ? products.slice(0, 10).map((product, index) => (
+            ? products.map((product, index) => (
                 <div key={index}>
                   <Card product={product} />
                 </div>
