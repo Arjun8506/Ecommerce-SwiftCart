@@ -1,8 +1,14 @@
 import React from 'react'
+import { useCartContext } from '../context/CartContext'
 
 const Cart = () => {
+
+  const { cartItems } = useCartContext()
+
+  console.log(cartItems);
+
   return (
-    <div>Cart</div>
+    <div></div>
   )
 }
 

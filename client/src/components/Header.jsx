@@ -4,13 +4,16 @@ import { FaSearch, FaShoppingCart } from "react-icons/fa";
 import { CgMenuGridR } from "react-icons/cg";
 import { FaCartPlus } from "react-icons/fa";
 import { RiDeleteBack2Fill } from "react-icons/ri";
-import logo from "../assests/swiftcart.png";
 import { useAuthContext } from "../context/AuthContext";
 import Logout from "./Logout";
+import { useCartContext } from "../context/CartContext";
+import { MdDashboard } from "react-icons/md";
+import { CgProfile, CgLogOut } from "react-icons/cg";
 
 const Header = () => {
   const [isVisible, setisVisible] = useState(false);
   const { authUser } = useAuthContext();
+  const { cartItems } = useCartContext()
 
   const toggleMenu = () => {
     setisVisible(!isVisible);
@@ -24,10 +27,17 @@ const Header = () => {
     return;
   };
 
+  useEffect(() => {
+    if (!authUser) {
+      settoggleDrop(false)
+    }
+  }, [Logout])
+  
+
   return (
     <header>
       <div
-        className="w-full py-6 flex items-center justify-between px-2 overflow-hidden absolute top-0 z-50 
+        className="w-full max-w-[1500px] py-6 flex items-center justify-between px-2 overflow-hidden absolute top-0 z-50 
         "
       >
         <div className="text-purple-950 text-center uppercase">
@@ -36,14 +46,50 @@ const Header = () => {
             <p className="text-xs font-semibold">Online Shop</p>
           </Link>
         </div>
-        <div className="flex gap-2">
-          <button className="text-xl bg-orange-600 text-white  rounded-lg p-1">
-            <Link to={"/cart"}>
-              <FaCartPlus />
-            </Link>
+        <div className="flex gap-2 lg:gap-5 items-center">
+        <nav>
+        <div className=" hidden lg:inline">
+        <ul className="w-full flex items-center gap-4">
+          <button
+            type="button"
+            className="capitalize hover:opacity-60 font-semibold"
+          >
+            <Link to={"/about"}>About us</Link>
           </button>
           <button
-            className="text-xl bg-orange-600 text-white  rounded-lg p-1"
+            type="button"
+            className=" capitalize hover:opacity-60 font-semibold"
+          >
+            <Link to={"/shop"}>shop</Link>
+          </button>
+          <button
+            type="button"
+            className=" capitalize hover:opacity-60 font-semibold"
+          >
+            <Link to={"/blog"}>blogs</Link>
+          </button>
+          <button
+            type="button"
+            className=" capitalize hover:opacity-60 font-semibold"
+          >
+            <Link to={"/contact"}>contact us</Link>
+          </button>
+
+          {authUser ? (
+            ""
+          ) : (
+            <button
+              type="button"
+              className="capitalize hover:opacity-60 font-semibold"
+            >
+              <Link to={"/login"}>login</Link>
+            </button>
+          )}
+        </ul>
+        </div>
+      </nav>
+          <button
+            className="text-xl lg:hidden bg-orange-600 text-white  rounded-lg p-1"
             onClick={toggleMenu}
           >
             {isVisible ? <RiDeleteBack2Fill /> : <CgMenuGridR />}
@@ -65,54 +111,64 @@ const Header = () => {
       </div>
 
       <div
-        className={` absolute top-[16vh] -right-0 z-50 w-48 bg-white/80 rounded-lg capitalize p-2 ${
+        className={` absolute top-[16vh] right-1 z-50 w-fit bg-white/80 flex flex-col gap-2 items-center  rounded-lg capitalize p-2 ${
           toggleDrop ? "block" : "hidden"
         } `}
-      >
+        > 
+        {authUser?.isAdmin === true && (
+          <button className="bg-orange-500 text-white p-1 rounded-sm">
+          <Link
+            to={"/admin/dashboard"}
+          >
+            <MdDashboard />
+          </Link>
+          </button>
+        )}
+      <button className="bg-orange-500 text-white p-1 rounded-sm">
         <Link
           to={"/profile"}
-          className="btn bg-orange-500 text-white w-full mb-2"
         >
-          my profile
+          <CgProfile />
         </Link>
-        {authUser?.isAdmin === true && (
-          <Link
-            to={"/isadmin/create"}
-            className="btn bg-orange-500 text-white w-full mb-2"
-          >
-            Create Product
-          </Link>
-        )}
+      </button>
+        <button className=" bg-orange-500 text-white  rounded-sm p-1 relative">
+            <Link to={"/cart"}>
+              <FaCartPlus />
+            </Link>
+            {cartItems.length > 0 && (
+              <p className="absolute -top-3 -right-1 text-black text-xs">{cartItems.length}</p>
+            ) }
+          </button>
         <Logout />
       </div>
 
       <div
-        className={` w-full h-screen bg-white/80 ${
+        className={` w-full h-screen bg-white/95 ${
           isVisible ? "block" : "hidden"
-        } ease-in-out fixed pt-20 transition-all  top-0 z-30 overflow-hidden `}
+        } ease-in-out fixed pt-28 transition-all  top-0 z-30 overflow-hidden `}
       >
-        <ul className="w-full flex flex-col gap-2 items-center  pt-5 px-2 text-xl">
+        <ul className="w-full flex flex-col items-center">
           <button
             type="button"
-            className="btn bg-orange-500 text-white uppercase w-full"
+            className="border-t-[1px] border-dashed font-semibold border-slate-500 uppercase w-full py-4 border-b-[1px]"
           >
             <Link to={"/about"}>About us</Link>
           </button>
           <button
             type="button"
-            className="btn bg-orange-500 text-white uppercase w-full"
+            className=" border-dashed font-semibold border-slate-500 uppercase w-full py-4 border-b-[1px]"
           >
             <Link to={"/shop"}>shop</Link>
           </button>
           <button
             type="button"
-            className="btn bg-orange-500 text-white uppercase w-full"
+            className=" border-dashed font-semibold border-slate-500 uppercase w-full py-4 border-b-[1px]"
           >
             <Link to={"/blog"}>blogs</Link>
           </button>
           <button
             type="button"
-            className="btn bg-orange-500 text-white uppercase w-full"
+            className=" border-dashed font-semibold border-slate-500 uppercase w-full py-4 border-b-[1px]"
           >
             <Link to={"/contact"}>contact us</Link>
           </button>
@@ -122,13 +178,15 @@ const Header = () => {
           ) : (
             <button
               type="button"
-              className="btn bg-orange-500 text-white uppercase w-full"
+              className=" border-dashed font-semibold border-slate-500 uppercase w-full py-4 border-b-[1px]"
             >
               <Link to={"/login"}>login</Link>
             </button>
           )}
         </ul>
       </div>
+
+     
     </header>
   );
 };

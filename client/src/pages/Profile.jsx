@@ -1,6 +1,7 @@
 import React from "react";
 import { useAuthContext } from "../context/AuthContext";
 import getLocation from "../utils/FetchingLocation";
+import ProfileImage from "../components/ProfileImage";
 
 const Profile = () => {
   const { authUser } = useAuthContext();
@@ -13,11 +14,7 @@ const Profile = () => {
     <section>
       <div className="w-full min-h-screen px-2 pt-24 flex flex-col items-center">
         <h1 className="my-2 uppercase font-bold text-xl">Profile</h1>
-        <img
-          src={authUser.profilePic}
-          alt="profilepic"
-          className="w-20 h-20 rounded-full border-2 object-cover"
-        />
+        <ProfileImage />
         <h1>
           Hi,{" "}
           <span className="text-lg font-semibold capitalize">

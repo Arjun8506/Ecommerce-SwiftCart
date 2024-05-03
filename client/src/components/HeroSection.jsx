@@ -96,11 +96,11 @@ export const HeroSection = () => {
         </SwiperSlide>
       </Swiper> */}
 
-        <div className="w-full h-96">
+        <div className="w-full h-96 lg:h-screen">
       <img src={slide1} alt="" className=" w-full h-full object-cover aspect-auto" />
         </div>
-        <div className="w-full h-96 text-purple-950 text-sm font-semibold px-2 absolute top-0 flex flex-col items-start justify-end pb-16">
-          <h1 className="mb-5 text-xl uppercase font-extrabold">Just Sit back and <br /> let us do the work <br /> for you!</h1>
+        <div className="w-full h-96 lg:h-screen text-purple-950 text-sm font-semibold px-2 absolute top-0 flex flex-col items-start justify-end pb-16 lg:pb-20">
+          <h1 className="mb-5 text-xl lg:text-3xl uppercase font-extrabold">Just Sit back and <br /> let us do the work <br /> for you!</h1>
           <button className="font-bold p-2 px-3 bg-orange-600 text-white rounded-lg hover:opacity-80 text-lg">
             <Link to={"/shop"}>Shop Now</Link>
           </button>

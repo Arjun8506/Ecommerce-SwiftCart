@@ -1,27 +1,38 @@
 import React from "react";
+import { useCartContext } from "../context/CartContext";
+import { Link } from "react-router-dom";
 
 const Card = ({ product }) => {
+  const { addToCart } = useCartContext();
+
+  const handleAddToCartFunction = (product) => {
+    addToCart(product);
+  };
 
   return (
-      <div className="card w-full h-full bg-white rounded-lg overflow-hidden  mx-auto mb-10">
-        <div>
-          <img src={product.img} alt="car!" className="" />
-        </div>
-        <div className="p-1 pt-2 px-2" >
-          <h2 className="font-extrabold ">{product.name}</h2>
-          <p className="text-sm font-semibold">Price: {product.price}</p>
-          <p className="text-xs">
-            {product.description}
-            <button>Read More</button>
-          </p>
-          <p className="font-bold text-sm">Rating: ♣ ♣ ♣ ♣ ♠</p>
-          <div className=" w-full mt-2">
-            <button className="p-1 text-white bg-orange-600 rounded-lg hover:opacity-80 mx-auto text-sm font-bold">
-              Add To Cart
-            </button>
-          </div>
+    <div className="card w-full h-fit bg-white rounded-lg overflow-hidden  mx-auto mb-10">
+      <div>
+        <img
+          src={product.images[0]}
+          alt="car!"
+          className="w-full h-full object-cover aspect-square"
+        />
+      </div>
+      <div className="p-1 pt-2 px-2">
+        <Link to={`/product/${product._id}`}>
+        <h2 className="font-extrabold ">{product.name}</h2>
+        </Link>
+        <p className="text-sm font-semibold">Price: {product.price}</p>
+        <div className=" w-full my-2">
+          <button
+            className="p-2 w-full text-white bg-orange-600 rounded-lg hover:opacity-80 mx-auto text-sm font-bold"
+            onClick={() => handleAddToCartFunction(product)}
+          >
+            Add To Cart
+          </button>
         </div>
       </div>
+    </div>
   );
 };
 

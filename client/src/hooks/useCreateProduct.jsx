@@ -25,7 +25,7 @@ export const useCreateProduct = () => {
             setloading(false)
             seterror(null)
             alert(res.data.message)
-            navigate("/shop")
+            navigate("/admin/dashboard")
             
         } catch (error) {
             setloading(false)

@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { CgLogOut } from "react-icons/cg";
 
 const Logout = () => {
   const { setauthUser } = useAuthContext();
@@ -22,6 +23,7 @@ const Logout = () => {
       setauthUser(null);
       seterror(null);
       navigate("/");
+      window.location.reload()
     } catch (error) {
       seterror(error.message);
     }
@@ -31,8 +33,8 @@ const Logout = () => {
     <>
       <button type="button"
       onClick={handleLogout}
-      className="btn bg-orange-500 text-white w-full">
-        Logout
+      className=" bg-orange-500 text-white p-1 rounded-sm">
+        <CgLogOut />
       </button>
       {error ? (
         <p className="text-xs text-red-700 text-center">{error.message}</p>

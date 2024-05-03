@@ -9,6 +9,7 @@ import {
 import { FaPlus } from "react-icons/fa";
 import app from "../../firebase";
 import { useCreateProduct } from "../hooks/useCreateProduct";
+import SidePanel from "./SidePanel";
 
 const CreateProduct = () => {
   const { authUser } = useAuthContext();
@@ -100,16 +101,12 @@ const CreateProduct = () => {
 
   return (
     <section>
-      <div className="w-full min-h-screen pt-24 px-2 pb-5">
-        <h1 className="text-xl font-bold ">
-          Hi,
-          <span className="px-2 capitalize">{authUser?.fullname}</span>
-          🙌
-        </h1>
-        <p className="mt-2 font-semibold text-sm">Create Product Here</p>
+      <SidePanel />
+      <div className="w-full min-h-screen pt-24 px-5 pb-20">
+        <p className="font-semibold text-xl text-center">Create Product Here</p>
 
         <form
-          className=" w-full flex flex-col gap-2 py-5"
+          className=" w-[80%] flex flex-col gap-2 py-5 mx-auto"
           onSubmit={handleCreateProduct}
         >
           <input

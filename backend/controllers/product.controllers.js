@@ -1,3 +1,4 @@
+import { json } from "express"
 import Product from "../models/product.model.js"
 import { errorHandler } from "../utility/errorHandler.js"
 
@@ -41,4 +42,46 @@ export const getAllProducts = async (req, res, next) => {
     }
 }
 
+export const getSpecificProduct = async (req, res, next) => {
+    try {
 
+        const productId = req.params.id
+        const product = await Product.findById(productId)
+        if (!product) next(errorHandler(404, "Product Not Found"))
+        res.status(200).json({
+            success: true,
+            product
+        })
+
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const updateProduct = async (req, res, next) => {
+    try {
+        const productId = req.params.id
+        const dataToUpdate = req.body
+        const updatedProduct = await Product.findByIdAndUpdate(productId, { $set: dataToUpdate }, { new: true })
+        res.status(200).json({
+            success: true,
+            updatedProduct
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const deleteProduct = async (req, res, next) => {
+    try {
+        const productId = req.params.id
+        const product = await Product.findByIdAndDelete(productId)
+        res.status(200).json({
+            success: true,
+            product,
+            message: "Deleted Item Successfully"
+        })
+    } catch (error) {
+        next(error)
+    }
+}
