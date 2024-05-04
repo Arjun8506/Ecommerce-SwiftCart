@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { IoSend } from "react-icons/io5";
 import { useAuthContext } from "../context/AuthContext";
+import { useSendReview } from "../hooks/useSendReview";
 
 const CommentComponent = ({ product }) => {
 
-  console.log(product);
-
     const { authUser } = useAuthContext()
+    
+    const { sendReview, loading, error } = useSendReview()
 
-    
-    
     const [review, setreview] = useState({
       productId: "",
       ratings: 0,
@@ -27,9 +26,10 @@ const CommentComponent = ({ product }) => {
         setreview({ ...review, ratings: ratingValue });
       };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         console.log(review);
+        await sendReview(review)
     }
 
   return (

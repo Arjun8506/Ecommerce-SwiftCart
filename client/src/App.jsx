@@ -10,7 +10,6 @@ import Header from "./components/Header";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import About from "./pages/About";
-import Blogs from "./pages/Blogs";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -21,13 +20,13 @@ import Cart from "./pages/Cart";
 import ProductDetails from "./pages/ProductDetails";
 import CreateProduct from "./adminDashboard/CreateProduct";
 import Dashboard from "./adminDashboard/Dashboard";
-import SidePanel from "./adminDashboard/SidePanel";
 import AdminProductPage from "./adminDashboard/AdminProductPage";
 import AdminOrdersPage from "./adminDashboard/AdminOrdersPage";
 import AdminUsersPage from "./adminDashboard/AdminUsersPage";
 import AdminReviewsPage from "./adminDashboard/AdminReviewsPage";
 import ProductEditPage from "./adminDashboard/ProductEditPage";
 import UserEditPage from "./adminDashboard/UserEditPage";
+import News from "./pages/News";
 
 const App = () => {
   const { authUser } = useAuthContext();
@@ -41,7 +40,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/about" element={<About />} />
-            <Route path="/blogs" element={<Blogs />} />
+            <Route path="/news" element={<News />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/profile" element={<Profile />} />
             <Route

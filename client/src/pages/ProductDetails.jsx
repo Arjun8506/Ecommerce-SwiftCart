@@ -52,7 +52,24 @@ const ProductDetails = () => {
     image: product?.images ? product.images[0] : null,
     quantity: 1
   })
+
+  useEffect(() => {
+    if (product) {
+      setcartItemDetails(prevState => ({
+        ...prevState,
+        userid: authUser?._id,
+        _id: product?._id,
+        name: product?.name,
+        price: product?.price,
+        image: product?.images ? product.images[0] : null,
+        quantity: 1
+      }));
+    }
+  }, [product])
+  
+
   const handleAddToCartFunction = (cartItemDetails) => {
+
     addToCart(cartItemDetails);
   };
 
@@ -98,7 +115,7 @@ const ProductDetails = () => {
 
             {product?.tags?.map((tag) =>
               tag === "#Cloths" ? (
-                <div className="flex items-start gap-2 my-2">
+                <div className="flex items-start gap-2 my-2" key={tag}>
                   <p className="font-semibold text-lg">Size: </p>
                   <div className="join">
                     <input
@@ -132,11 +149,13 @@ const ProductDetails = () => {
             )}
 
             <div className=" w-full join join-vertical">
-              <button className="btn join-item bg-orange-500 text-white"
-              onClick={() => handleAddToCartFunction(cartItemDetails)}
-              >
-                Add To Cart
-              </button>
+              {loading ? "" : (
+                <button className="btn join-item bg-orange-500 text-white"
+                onClick={() => handleAddToCartFunction(cartItemDetails)}
+                >
+                  Add To Cart
+                </button>
+              )}
               <button className="btn join-item bg-black text-white">
                 Buy Now
               </button>

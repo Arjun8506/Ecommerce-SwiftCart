@@ -37,11 +37,13 @@ export const getAllReview = async (req, res, next) => {
 export const getProductReview = async (req, res, next) => {
     try {
         const productId = req.params.id
-        const productReviews = await Review.find( { productId } ).sort({ createdAt: -1 })
-        if (!productReviews) return next(errorHandler(403, "unable to get review"))
+        console.log(productId);
+        const productReview = await Review.find( { productId: productId } )
+        console.log(productReview);
+        if (!productReview) return next(errorHandler(403, "unable to get review"))
         res.status(200).json({
             success: true,
-            productReviews
+            productReview
         })
     } catch (error) {
         next(error)

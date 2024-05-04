@@ -66,7 +66,7 @@ const Header = () => {
             type="button"
             className=" capitalize hover:opacity-60 font-semibold"
           >
-            <Link to={"/blog"}>blogs</Link>
+            <Link to={"/news"}>News</Link>
           </button>
           <button
             type="button"
@@ -164,7 +164,7 @@ const Header = () => {
             type="button"
             className=" border-dashed font-semibold border-slate-500 uppercase w-full py-4 border-b-[1px]"
           >
-            <Link to={"/blog"}>blogs</Link>
+            <Link to={"/news"}>News</Link>
           </button>
           <button
             type="button"
