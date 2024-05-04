@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import { useGetAllProducts } from "../hooks/UseGetAllProducts";
+import { Link } from "react-router-dom";
 
 const Products = () => {
-  
   const { loading, error, getAllProducts, products } = useGetAllProducts();
 
   useEffect(() => {
@@ -12,6 +12,7 @@ const Products = () => {
     }
     fetchData();
   }, []);
+
 
   return (
     <>
@@ -45,21 +46,27 @@ const Products = () => {
       {loading ? (
         <p className="mb-5 text-center text-xl">Loading</p>
       ) : (
+        <>
         <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 px-2 lg:px-5">
           {products?.length > 10
-            ? products
-                .slice(0, 10)
-                .map((product, index) => ( 
-                <div key={index}>
+            ? products.slice(0, 10).map((product, index) => (
+              <div key={index}>
                   <Card product={product} />
                 </div>
-               ))
+              ))
             : products.map((product, index) => (
                 <div key={index} className="">
                   <Card product={product} />
                 </div>
               ))}
         </div>
+        <div className="w-full h-fit flex items-center justify-center py-5">
+        <Link to={"/shop"}>
+              <button className="btn bg-orange-500 text-white w-fit capitalize ">View All Products</button>
+        </Link>
+        </div>
+
+  </>
       )}
     </>
   );

@@ -23,15 +23,36 @@ export const CartContextProvider = ({ children }) => {
     // Local storage will be updated by useEffect
   };
 
+
+  const increaseQuantity = (productId) => {
+    const updatedCartItems = cartItems.map((item) => {
+      if (item._id === productId) {
+        return { ...item, quantity: item.quantity + 1 };
+      }
+      return item;
+    });
+    setCartItems(updatedCartItems);
+  };
+
+  const decreaseQuantity = (productId) => {
+    const updatedCartItems = cartItems.map((item) => {
+      if (item._id === productId && item.quantity > 1) {
+        return { ...item, quantity: item.quantity - 1 };
+      }
+      return item;
+    });
+    setCartItems(updatedCartItems);
+  };
+
   const removeFromCart = (productId) => {
-    const updatedCartItems = cartItems.filter((item) => item.id !== productId);
+    const updatedCartItems = cartItems.filter((item) => item._id !== productId);
     setCartItems(updatedCartItems);
   };
 
   return (
     <>
       <CartContext.Provider
-        value={{ cartItems, setCartItems, addToCart, removeFromCart }}
+        value={{ cartItems, setCartItems, addToCart, removeFromCart, increaseQuantity, decreaseQuantity }}
       >
         {children}
       </CartContext.Provider>

@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { useCartContext } from "../context/CartContext";
 import { Link } from "react-router-dom";
+import { useAuthContext } from "../context/AuthContext";
 
 const Card = ({ product }) => {
+  const { authUser } = useAuthContext()
   const { addToCart } = useCartContext();
 
-  const handleAddToCartFunction = (product) => {
-    addToCart(product);
+  const [cartItemDetails, setcartItemDetails] = useState({
+    userid: authUser?._id,
+    _id: product._id,
+    name: product.name,
+    price: product.price,
+    image: product.images[0],
+    quantity: 1
+  })
+
+  const handleAddToCartFunction = (cartItemDetails) => {
+    addToCart(cartItemDetails);
   };
 
   return (
@@ -25,12 +36,19 @@ const Card = ({ product }) => {
         <p className="text-sm font-semibold">Price: {product.price}</p>
         <p>⭐⭐⭐⭐⭐</p>
         <div className=" w-full my-2">
+          {authUser ? (
           <button
             className="p-2 w-full text-white bg-orange-600 rounded-lg hover:opacity-80 mx-auto text-sm font-bold"
-            onClick={() => handleAddToCartFunction(product)}
+            onClick={() => handleAddToCartFunction(cartItemDetails)}
           >
             Add To Cart
           </button>
+          ) : <button
+          className="p-2 w-full text-white bg-orange-600 rounded-lg hover:opacity-80 mx-auto text-sm font-bold"
+          onClick={() => alert("Fisrt Login")}
+        >
+          Add To Cart
+        </button>}
         </div>
       </div>
     </div>

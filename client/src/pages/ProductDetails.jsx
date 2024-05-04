@@ -1,14 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useGetSpecificProduct } from "../hooks/useProductDetails";
 import CommentComponent from "../components/CommentComponent";
+import { useAuthContext } from "../context/AuthContext";
+import { useCartContext } from "../context/CartContext";
 
 function extractIdFromUrl(url) {
   const regex = /\/([a-zA-Z0-9]+)\/?$/;
   var match = regex.exec(url);
-  return match ? match[1] : null;
+  return match ? match[1] : null; 
 }
 
 const ProductDetails = () => {
+ const { authUser } = useAuthContext()
+ 
   const { loading, error, product, getSpecificProduct } =
     useGetSpecificProduct();
 
@@ -23,6 +27,11 @@ const ProductDetails = () => {
     fetchData();
   }, []);
 
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
+
+
   let top1images;
   let otherImages;
 
@@ -32,6 +41,20 @@ const ProductDetails = () => {
   } else {
     console.log("only 1 image");
   }
+
+  const { addToCart } = useCartContext()
+
+  const [cartItemDetails, setcartItemDetails] = useState({
+    userid: authUser?._id,
+    _id: product?._id,
+    name: product?.name,
+    price: product?.price,
+    image: product?.images ? product.images[0] : null,
+    quantity: 1
+  })
+  const handleAddToCartFunction = (cartItemDetails) => {
+    addToCart(cartItemDetails);
+  };
 
   return (
     <section>
@@ -109,7 +132,9 @@ const ProductDetails = () => {
             )}
 
             <div className=" w-full join join-vertical">
-              <button className="btn join-item bg-orange-500 text-white">
+              <button className="btn join-item bg-orange-500 text-white"
+              onClick={() => handleAddToCartFunction(cartItemDetails)}
+              >
                 Add To Cart
               </button>
               <button className="btn join-item bg-black text-white">
@@ -118,7 +143,7 @@ const ProductDetails = () => {
             </div>
 
             {/* Comment section */}
-            <CommentComponent product={product} />
+            <CommentComponent product={product._id} />
           </div>
         </div>
       </div>

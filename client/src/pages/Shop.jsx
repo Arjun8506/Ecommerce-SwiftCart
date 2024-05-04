@@ -4,6 +4,7 @@ import Card from "../components/Card";
 
 const Shop = () => {
   const { loading, error, getAllProducts, products } = useGetAllProducts();
+  const [displayedProducts, setDisplayedProducts] = useState(10);
 
   useEffect(() => {
     async function fetchData() {
@@ -15,6 +16,13 @@ const Shop = () => {
   const [isVisible, setisVisible] = useState(false);
 
   const toggleSortMenu = () => setisVisible(!isVisible);
+
+  const handleViewMore = () => {
+    // Increment the number of displayed products by 10 or by the remaining products if there are less than 10 left
+    const remainingProducts = products.length - displayedProducts;
+    const nextProducts = remainingProducts > 10 ? displayedProducts + 10 : products.length;
+    setDisplayedProducts(nextProducts);
+  };
 
   return (
     <div className="w-full min-h-screen pt-28 pb-10 px-2 bg-slate-100">
@@ -74,7 +82,7 @@ const Shop = () => {
       ) : (
         <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-2 px-2">
           {products?.length > 10
-            ? products.map((product, index) => (
+            ? products.slice(0, displayedProducts).map((product, index) => (
                 <div key={index}>
                   <Card product={product} />
                 </div>
@@ -84,6 +92,14 @@ const Shop = () => {
                   <Card product={product} />
                 </div>
               ))}
+        </div>
+      )}
+
+      {products.length > displayedProducts && ( // Render "View More" button only if there are more products to display
+        <div className="flex justify-center mt-5">
+          <button className="btn bg-black text-white" onClick={handleViewMore}>
+            View More
+          </button>
         </div>
       )}
     </div>

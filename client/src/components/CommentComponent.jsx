@@ -1,17 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoSend } from "react-icons/io5";
 import { useAuthContext } from "../context/AuthContext";
 
 const CommentComponent = ({ product }) => {
 
+  console.log(product);
+
     const { authUser } = useAuthContext()
 
+    
+    
     const [review, setreview] = useState({
-        productId: product._id,
-        ratings: 0,
-        comment: "",
-        userId: authUser?._id
+      productId: "",
+      ratings: 0,
+      comment: "",
+      userId: authUser?._id
     })
+    useEffect(() => {
+      const setproductIdvalue = () => {
+        setreview({ ...review, productId: product })
+      }
+      setproductIdvalue()
+    }, [product])
 
     const handleRating = (ratingValue) => {
         setreview({ ...review, ratings: ratingValue });
