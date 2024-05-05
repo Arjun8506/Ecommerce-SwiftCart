@@ -34,12 +34,12 @@ const About = () => {
   ];
 
   return (
-    <div className="pt-20 w-full min-h-screen">
-      <img src={aboutpage} alt="" />
+    <div className="pt-24 w-full min-h-screen">
+      <img src={aboutpage} alt="" className="lg:h-72 w-full object-cover aspect-square" />
       <div className="px-2">
         {aboutPageData.map((data, index) => (
           <div
-            className={`flex flex-col py-2 items-center ${
+            className={` lg:w-[70%] mx-auto flex flex-col py-2 items-center ${
               index === 6 && ""
             }`}
             key={index}
@@ -47,7 +47,7 @@ const About = () => {
             <h1 className="mb-2 uppercase font-bold text-xl text-purple-500">
               {data.h1}
             </h1>
-            <p className="text-center text-sm">{data.p}</p>
+            <p className="text-center text-sm mb-5">{data.p}</p>
           </div>
         ))}
       </div>

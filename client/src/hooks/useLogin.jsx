@@ -20,7 +20,7 @@ export const useLogin = () => {
             console.log(res);
             
             if (res.data.success === false) {
-                seterror(res.data.message)
+                seterror(res.response.data.message)
                 setloading(false)
                 return
             }

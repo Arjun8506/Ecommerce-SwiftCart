@@ -1,20 +1,19 @@
 import { useState } from "react"
 import axios from "axios"
-import { useNavigate } from "react-router-dom"
 
-export const useSendMessage = () => {
+export const useGetProductReviews = () => {
 
-    const navigate = useNavigate()
     const [loading, setloading] = useState(false)
     const [error, seterror] = useState(null)
+    const [productReviews, setproductReviews] = useState([])
 
-    const sendMessage = async (formData) => {
+    const getProductReviews = async (id) => {
         
         setloading(true)
         try {
-            const res = await axios.post("http://localhost:3000/api/contact/sendmessage", formData)
+            const res = await axios.get(`http://localhost:3000/api/reviews/productreviews/${id}`)
             
-            if (res.success === false) {
+            if (res.data.success === false) {
                 seterror(res.response.data.message)
                 setloading(false)
                 return
@@ -22,15 +21,13 @@ export const useSendMessage = () => {
 
             setloading(false)
             seterror(null)
-            alert(res.data.message)
-            navigate("/")
-            
+            setproductReviews(res.data.productReview)
+
         } catch (error) {
             setloading(false)
-            console.log(error);
             seterror(error.message)
         }
     }
 
-    return { loading, error , sendMessage }
+    return { loading, error , getProductReviews, productReviews }
 }

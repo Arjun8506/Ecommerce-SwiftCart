@@ -14,7 +14,7 @@ export const useGetSpecificProduct = () => {
                 const res = await axios.get(`http://localhost:3000/api/product/productspacific/${id}`)
                 
                 if (res.data.success === false) {
-                    seterror(res.data.message)
+                    seterror(res.response.data.message)
                     setloading(false)
                     return
                 }

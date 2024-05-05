@@ -21,22 +21,22 @@ const Footer = () => {
       </button>
       <div className="py-5 flex items-center justify-between px-5 bg-slate-800">
         <div className="flex flex-col gap-2">
-          <Link to={"/"}>Your Cart</Link>
-          <Link to={"/"}>Sell</Link>
-          <Link to={"/"}>SwiftCart Pay</Link>
           <Link to={"/"}>Your SwiftCart.co</Link>
+          <Link to={"/cart"}>Your Cart</Link>
+          <Link to={"/register"}>Don't Have An account</Link>
+          <p>Contact No: <span>+91 1234567892</span></p>
         </div>
-        <div className=" flex flex-col gap-2">
-          <Link to={"/"}>Your Account</Link>
-          <Link to={"/"}>Returns</Link>
-          <Link to={"/"}>Contact Us</Link>
-          <Link to={"/"}>Customer Service</Link>
+        <div className=" flex flex-col gap-2 items-end">
+          <Link to={"/profile"}>Your Account</Link>
+          <Link to={"/contact"}>Contact Us</Link>
+          <Link to={"/news"}>Latest News</Link>
+          <p>Email Us: <span>swiftCart1234@co.com</span></p>
         </div>
       </div>
       <div className="flex flex-col gap-5 items-center">
             <p className="flex items-center gap-2 text-xs text-gray-400 mt-4"><BiWorld />English</p>
-            <h1>Already a customer? <Link to={"/"}>Log in</Link></h1>
-            <p className="text-xs text-white">© 1996-2024, Amazon.com, Inc. or its affiliates</p>
+            <h1>Already a customer? <Link to={"/login"}>Log in</Link></h1>
+            <p className="text-xs text-white">© 2024-TillNow, {" " } swiftcart.com, Inc. or its affiliates</p>
       </div>
     </div>
   );

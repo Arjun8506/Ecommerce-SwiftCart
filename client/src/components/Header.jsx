@@ -37,7 +37,7 @@ const Header = () => {
   return (
     <header>
       <div
-        className="w-full max-w-[1500px] py-6 flex items-center justify-between px-2 overflow-hidden absolute top-0 z-50 
+        className="w-full max-w-[1500px] py-6 flex items-center justify-between px-2 lg:px-5 overflow-hidden absolute top-0 z-50 
         "
       >
         <div className="text-purple-950 text-center uppercase">
@@ -111,7 +111,7 @@ const Header = () => {
       </div>
 
       <div
-        className={` absolute top-[16vh] right-1 z-50 w-fit bg-white/80 flex flex-col gap-2 items-center  rounded-lg capitalize p-2 ${
+        className={` absolute top-[16vh] right-1 lg:right-3 z-50 w-fit bg-white/80 flex flex-col gap-2 items-center  rounded-lg capitalize p-2 ${
           toggleDrop ? "block" : "hidden"
         } `}
         > 
@@ -136,7 +136,7 @@ const Header = () => {
               <FaCartPlus />
             </Link>
             {cartItems.length > 0 && (
-              <p className="absolute -top-3 -right-1 text-black text-xs">{cartItems.length}</p>
+              <p className="absolute -top-3 bg-black -right-1 text-white py-[2px] px-[6px] rounded-full text-xs font-bold">{cartItems.length}</p>
             ) }
           </button>
         <Logout />

@@ -18,7 +18,7 @@ export const useDeleteUser = () => {
                 const res = await axios.delete(`http://localhost:3000/api/users/user/${id}`)
                 
                 if (res.data.success === false) {
-                    seterror(res.data.message)
+                    seterror(res.response.data.message)
                     setloading(false)
                     return
                 }

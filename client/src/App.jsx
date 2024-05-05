@@ -27,6 +27,7 @@ import AdminReviewsPage from "./adminDashboard/AdminReviewsPage";
 import ProductEditPage from "./adminDashboard/ProductEditPage";
 import UserEditPage from "./adminDashboard/UserEditPage";
 import News from "./pages/News";
+import AdminCreateNews from "./adminDashboard/AdminCreateNews";
 
 const App = () => {
   const { authUser } = useAuthContext();
@@ -42,7 +43,7 @@ const App = () => {
             <Route path="/about" element={<About />} />
             <Route path="/news" element={<News />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile" element={ authUser ? (<Profile />) : <Navigate to={"/login"}  />} />
             <Route
               path="/cart"
               element={authUser ? <Cart /> : <Navigate to={"/login"} />}
@@ -58,6 +59,7 @@ const App = () => {
                 <Route path="/admin/orders" element={<AdminOrdersPage />} />
                 <Route path="/admin/users" element={<AdminUsersPage />} />
                 <Route path="/admin/reviws" element={<AdminReviewsPage />} />
+                <Route path="/admin/create/news" element={<AdminCreateNews />} />
                 <Route path="/admin/products/edit/:id" element={<ProductEditPage />} />
                 <Route path="/admin/users/edit/:id" element={<UserEditPage />} />
               </>

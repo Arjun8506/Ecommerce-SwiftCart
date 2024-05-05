@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useRegister } from "../hooks/useRegister";
+import GoogleOuth from "../components/GoogleOuth";
 
 const Register = () => {
 
@@ -19,7 +20,7 @@ const Register = () => {
 
   return (
     <div className="pt-20 w-full min-h-screen px-2  pb-10">
-      <div className="text-black flex flex-col items-center gap-2 py-5 ">
+      <div className="text-black flex flex-col items-center gap-2 py-5 w-full lg:w-[70%] mx-auto">
         <h1 className="font-bold text-xl">Join SwiftCart Today!</h1>
         <p className="text-center">
           Create your SwiftCart account to unlock exclusive benefits, track
@@ -29,7 +30,7 @@ const Register = () => {
         </p>
       </div>
 
-      <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
+      <form className="flex flex-col gap-5 w-full lg:w-[70%] mx-auto" onSubmit={handleSubmit}>
         <label className="input input-bordered flex items-center gap-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -84,6 +85,8 @@ const Register = () => {
         <button type="submit" className="btn bg-orange-700 text-white text-lg disabled:opacity-50" disabled = {loading}>
           {loading ? "Creating...." : "Create Account"}
         </button>
+
+        <GoogleOuth />
       </form>
 
       {error ? (
@@ -92,13 +95,6 @@ const Register = () => {
         <span>{error}</span>
       </div>
       ) : ""}
-
-      <button
-        type="button"
-        className="btn btn-primary w-full my-4 text-lg text-white"
-      >
-        Continue With Google
-      </button>
 
       <p className="text-sm text-center">
         Already Have an Account?{" "}

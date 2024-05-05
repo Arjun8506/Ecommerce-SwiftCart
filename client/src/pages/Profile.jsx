@@ -7,6 +7,7 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import app from "../../firebase";
+import { useEditUser } from "../hooks/useEditUser";
 
 const Profile = () => {
   const { authUser } = useAuthContext();
@@ -16,10 +17,14 @@ const Profile = () => {
   const [uploadError, setuploadError] = useState(null);
 
   const [formData, setformData] = useState({
-    email: "",
-    password: "",
-    profilePic: "",
   });
+
+  const handleChange = (e) => {
+      setformData({
+        ...formData, [e.target.id]: e.target.value
+      })
+    }
+  
 
   useEffect(() => {
     if (file) {
@@ -54,7 +59,13 @@ const Profile = () => {
     );
   };
 
-  console.log(formData);
+  //  Updating User
+  const { loading, error, editUser } = useEditUser();
+  const handleUserUpdate = async (e) => {
+    e.preventDefault();
+    console.log(formData);
+    await editUser(authUser._id, formData);
+  };
 
   return (
     <section>
@@ -78,9 +89,12 @@ const Profile = () => {
             {authUser.fullname}
           </span>
         </h1>
-        <div className="w-full flex flex-col gap-2 my-5">
-          <div className="w-[90%] mx-auto ">
-            <form className="flex flex-col gap-2 lg:w-[60%]">
+        <div className="w-full my-5 flex items-center justify-center">
+          <div className="w-[90%] ">
+            <form
+              className="flex flex-col gap-2 lg:w-[60%] mx-auto"
+              onSubmit={handleUserUpdate}
+            >
               <input
                 type="file"
                 ref={fileref}
@@ -98,7 +112,14 @@ const Profile = () => {
                   <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
                   <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
                 </svg>
-                <input type="text" className="grow" placeholder={authUser.email} />
+                <input
+                  type="email"
+                  className="grow"
+                  id="email"
+                  placeholder={authUser.email}
+                  value={formData.email}
+                  onChange={handleChange}
+                />
               </label>
               <label className="input input-bordered flex items-center gap-2">
                 <svg
@@ -116,11 +137,40 @@ const Profile = () => {
                 <input
                   type="password"
                   className="grow"
+                  id="password"
                   placeholder="Password"
+                  value={formData.passord}
+                  onChange={handleChange}
                 />
               </label>
-              <button className="btn bg-orange-500 text-white w-full uppercase">Update profile</button>
+              <button
+                className="btn bg-orange-500 text-white w-full uppercase disabled:opacity-50 hover:opacity-90"
+                disabled={loading}
+              >
+                {loading ? "Updating" : "Update profile"}
+              </button>
             </form>
+
+            {error ? (
+              <div role="alert" className="alert alert-error">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="stroke-current shrink-0 h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <span>Error! Task failed successfully.</span>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>

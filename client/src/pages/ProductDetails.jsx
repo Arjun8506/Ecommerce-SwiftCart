@@ -3,18 +3,22 @@ import { useGetSpecificProduct } from "../hooks/useProductDetails";
 import CommentComponent from "../components/CommentComponent";
 import { useAuthContext } from "../context/AuthContext";
 import { useCartContext } from "../context/CartContext";
+import { useGetProductReviews } from "../hooks/useGetProductReview";
 
 function extractIdFromUrl(url) {
   const regex = /\/([a-zA-Z0-9]+)\/?$/;
   var match = regex.exec(url);
-  return match ? match[1] : null; 
+  return match ? match[1] : null;
 }
 
 const ProductDetails = () => {
- const { authUser } = useAuthContext()
- 
+  const { authUser } = useAuthContext();
+
   const { loading, error, product, getSpecificProduct } =
     useGetSpecificProduct();
+
+  // getting product reviews
+  const { productReviews, getProductReviews } = useGetProductReviews();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,6 +26,7 @@ const ProductDetails = () => {
       const id = extractIdFromUrl(url);
       if (id) {
         await getSpecificProduct(id);
+        await getProductReviews(id);
       }
     };
     fetchData();
@@ -30,7 +35,6 @@ const ProductDetails = () => {
   if (error) {
     return <p>Error: {error}</p>;
   }
-
 
   let top1images;
   let otherImages;
@@ -42,7 +46,7 @@ const ProductDetails = () => {
     console.log("only 1 image");
   }
 
-  const { addToCart } = useCartContext()
+  const { addToCart } = useCartContext();
 
   const [cartItemDetails, setcartItemDetails] = useState({
     userid: authUser?._id,
@@ -50,28 +54,41 @@ const ProductDetails = () => {
     name: product?.name,
     price: product?.price,
     image: product?.images ? product.images[0] : null,
-    quantity: 1
-  })
+    quantity: 1,
+  });
 
   useEffect(() => {
     if (product) {
-      setcartItemDetails(prevState => ({
+      setcartItemDetails((prevState) => ({
         ...prevState,
         userid: authUser?._id,
         _id: product?._id,
         name: product?.name,
         price: product?.price,
         image: product?.images ? product.images[0] : null,
-        quantity: 1
+        quantity: 1,
       }));
     }
-  }, [product])
-  
+  }, [product]);
 
   const handleAddToCartFunction = (cartItemDetails) => {
-
-    addToCart(cartItemDetails);
+    if (authUser) {
+      addToCart(cartItemDetails);
+    } else {
+      alert("Login First");
+    }
   };
+
+  
+  const [averageRating, setAverageRating] = useState(0);
+
+  useEffect(() => {
+    if (productReviews && productReviews.length > 0) {
+      const totalRatings = productReviews.reduce((acc, review) => acc + review.ratings, 0);
+      const avgRating = totalRatings / productReviews.length;
+      setAverageRating(avgRating);
+    }
+  }, [productReviews]);
 
   return (
     <section>
@@ -103,7 +120,7 @@ const ProductDetails = () => {
             <h1 className=" text-xl font-bold">{product.name}</h1>
             <h1 className="text-green-500 flex items-center gap-1 ">
               Ratings:
-              <span>❤ ❤ ❤ ❤</span>
+              <span className=" text-yellow-300">{"⭐".repeat(Math.round(averageRating))}</span>
             </h1>
             <h1 className="font-semibold flex items-center gap-2">
               Price:
@@ -149,9 +166,12 @@ const ProductDetails = () => {
             )}
 
             <div className=" w-full join join-vertical">
-              {loading ? "" : (
-                <button className="btn join-item bg-orange-500 text-white"
-                onClick={() => handleAddToCartFunction(cartItemDetails)}
+              {loading ? (
+                ""
+              ) : (
+                <button
+                  className="btn join-item bg-orange-500 text-white"
+                  onClick={() => handleAddToCartFunction(cartItemDetails)}
                 >
                   Add To Cart
                 </button>
@@ -164,6 +184,38 @@ const ProductDetails = () => {
             {/* Comment section */}
             <CommentComponent product={product._id} />
           </div>
+        </div>
+
+          <h1 className=" font-bold text-black uppercase mb-4">Reviews:</h1>
+        <div className="w-full flex flex-col lg:flex-row flex-wrap gap-2  pb-5">
+          {productReviews?.length > 0 ? (
+            productReviews.map((review) => (
+              <div className=" flex items-start gap-5 border-[1px] border-slate-500 py-2 px-4 rounded-lg" key={review._id}>
+                <div className=" w-[15%]">
+                  <img
+                    src={review.userId.profilePic}
+                    alt=""
+                    className=" w-full h-full object-cover aspect-square rounded-full"
+                  />
+                </div>
+                <div className="">
+                  <h1 className=" font-bold text-black uppercase">
+                    {review?.userId?.fullname}
+                  </h1>
+                  <p>
+                    {Array.from({ length: review?.ratings }, (_, index) => (
+                      <span key={index} className=" text-yellow-400">&#9733;</span> // Unicode star character
+                    ))}
+                  </p>
+                  <p className=" text-sm font-[gilroy]">{review?.comment}</p>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p className="text-center text-lg font-bold">
+              No Reviews (You Send One 😊)
+            </p>
+          )}
         </div>
       </div>
     </section>

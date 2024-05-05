@@ -4,6 +4,8 @@ import { errorHandler } from "../utility/errorHandler.js"
 export const sendReview = async (req, res, next) => {
     try {
         const { productId, userId, comment, ratings } = req.body
+        const existedUser = await Review.findOne({ userId: userId, productId: productId })
+        if (existedUser) return next(errorHandler(402, "you already sended messages")) 
         const newReview = new Review({
             productId,
             userId,
@@ -37,9 +39,7 @@ export const getAllReview = async (req, res, next) => {
 export const getProductReview = async (req, res, next) => {
     try {
         const productId = req.params.id
-        console.log(productId);
-        const productReview = await Review.find( { productId: productId } )
-        console.log(productReview);
+        const productReview = await Review.find( { productId: productId } ).sort({ createdAt: -1 }).populate("productId userId")
         if (!productReview) return next(errorHandler(403, "unable to get review"))
         res.status(200).json({
             success: true,

@@ -1,20 +1,17 @@
 import { useState } from "react"
 import axios from "axios"
-import { useNavigate } from "react-router-dom"
 
-export const useDeleteReview = () => {
+export const useGetSpecificUser = () => {
 
-    const navigate = useNavigate()
     const [loading, setloading] = useState(false)
     const [error, seterror] = useState(null)
+    const [user, setuser] = useState({})
 
-    const deleteReview = async (id) => {
-        const confirmed = window.confirm("Are you sure you want to delete this product?");
+    const getSpecificUser = async (id) => {
 
-        if (confirmed) {
             setloading(true)
             try {
-                const res = await axios.delete(`http://localhost:3000/api/reviews/review/${id}`)
+                const res = await axios.get(`http://localhost:3000/api/users/user/${id}`)
                 
                 if (res.data.success === false) {
                     seterror(res.response.data.message)
@@ -24,18 +21,13 @@ export const useDeleteReview = () => {
     
                 setloading(false)
                 seterror(null)
-                alert(res.data.message)
-                navigate("/admin/reviws")
-                window.location.reload()
+                setuser(res.data.user)
                 
             } catch (error) {
                 setloading(false)
                 seterror(error.message)
             }
-        }else{
-            alert("You Canceled!")
-        }
     }
 
-    return { loading, error , deleteReview }
+    return { loading, error , getSpecificUser, user }
 }

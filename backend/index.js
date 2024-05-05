@@ -8,6 +8,7 @@ import productRoutes from "./routes/product.routes.js"
 import userRoutes from "./routes/user.routes.js"
 import reviewRoutes from "./routes/review.routes.js"
 import contactRoutes from "./routes/contact.routes.js"
+import newsRoutes from "./routes/news.routes.js"
 import connectToDatabase from "./connectToDB/connectToDb.js"
 
 const app = express()
@@ -22,6 +23,7 @@ app.use("/api/product", productRoutes)
 app.use("/api/users", userRoutes)
 app.use("/api/reviews", reviewRoutes)
 app.use("/api/contact", contactRoutes)
+app.use("/api/news", newsRoutes)
 
 
 app.use((err, req, res, next) => {
