@@ -56,7 +56,7 @@ const Card = ({ product }) => {
         <Link to={`/product/${product._id}`}>
         <h2 className="font-extrabold ">{product.name}</h2>
         </Link>
-        <p className="text-sm font-semibold">Price: {product.price}</p>
+        <p className="text-sm font-semibold">Price:{" "} ₨{product.price}</p>
         <h1 className="text-green-500 flex items-center gap-1 ">
               <span className=" text-yellow-300">{"⭐".repeat(Math.round(averageRating))}</span>
             </h1>

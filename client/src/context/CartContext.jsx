@@ -20,6 +20,7 @@ export const CartContextProvider = ({ children }) => {
   const addToCart = (product) => {
     const updatedCartItems = [...cartItems, product];
     setCartItems(updatedCartItems);
+    alert("Item Added To Cart")
     // Local storage will be updated by useEffect
   };
 

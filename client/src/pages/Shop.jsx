@@ -18,7 +18,6 @@ const Shop = () => {
   const toggleSortMenu = () => setisVisible(!isVisible);
 
   const handleViewMore = () => {
-    // Increment the number of displayed products by 10 or by the remaining products if there are less than 10 left
     const remainingProducts = products.length - displayedProducts;
     const nextProducts = remainingProducts > 10 ? displayedProducts + 10 : products.length;
     setDisplayedProducts(nextProducts);
