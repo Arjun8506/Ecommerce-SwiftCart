@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import cors from "cors"
 import Razorpay from "razorpay"
 import bodyParser from "body-parser"
+import path from "path"
 
 // Import of Files 
 import authRoutes from "./routes/auth.routes.js"
@@ -24,6 +25,8 @@ dotenv.config()
 app.use(bodyParser.json())
 const Port = process.env.PORT || 5000
 
+const __dirname = path.resolve()
+
 export const instance = new Razorpay({
     key_id: process.env.RAZORPAY_API_KEY,
     key_secret: process.env.RAZORPAY_API_SECRET,
@@ -38,7 +41,11 @@ app.use("/api/news", newsRoutes)
 app.use("/api/payment", paymentRoutes)
 app.use("/api/orders", orderRoutes)
 
+app.use(express.static(path.join(__dirname, "/client/dist")))
 
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+})
 
 app.listen(Port, () => {
     connectToDatabase()
