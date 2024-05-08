@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 import SidePanel from "./SidePanel";
 import { useCountContext } from "../context/CountContext";
 import { useGetAllUsers } from "../hooks/useAllUsers";
 import { useGetAllProducts } from "../hooks/UseGetAllProducts";
+import { useGetAllOrders } from "../hooks/useGetAllOrders";
 
 const Dashboard = () => {
   const { authUser } = useAuthContext();
@@ -12,11 +13,15 @@ const Dashboard = () => {
 
   const { users, getAllUsers } = useGetAllUsers();
   const { products, getAllProducts } = useGetAllProducts();
+  const { orders, getAllOrders } = useGetAllOrders();
+
+  const [totalSaleAmount, setTotalSaleAmount] = useState(0);
 
   useEffect(() => {
     async function fetchdata() {
       await getAllUsers();
       await getAllProducts();
+      await getAllOrders();
     }
     fetchdata();
   }, []);
@@ -25,10 +30,15 @@ const Dashboard = () => {
     setCount(prevCount => ({
       ...prevCount,
       product: products.length,
-      user: users.length
+      user: users.length,
+      order: orders.length
     }));
-  }, [products.length, users.length]);
+
+    const totalAmount = orders.reduce((acc, order) => acc + order.amount, 0);
+    setTotalSaleAmount(totalAmount);
+  }, [products.length, users.length, orders.length]);
   
+  // Calculate total sale amount
 
   return (
     <section>
@@ -37,7 +47,7 @@ const Dashboard = () => {
         <div className="w-full min-h-screen rounded-l-md ">
           <div className="w-full h-fit bg-orange-500 flex items-center flex-col py-1 text-white">
             <h1>Total Sale Amount : </h1>
-            <p>$14,200,528</p>
+            <p>₨ {totalSaleAmount}</p>
           </div>
           <div className="w-full h-fit flex items-center justify-around py-4 px-5">
             <Link to={"/admin/products"}>

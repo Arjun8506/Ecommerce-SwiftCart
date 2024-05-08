@@ -21,9 +21,8 @@ const Home = () => {
       <div className="w-full h-64 shadow-xl flex items-center justify-center rounded-none bg-center bg-cover bg-no-repeat mb-5"
       style={{backgroundImage: `url(${news[0]?.image})` }}
       >
-        <div className=" w-full h-fit px-4 " >
-          <h2 className=" text-3xl text-white font-bold ">😍 {news[0]?.highlight} 👋</h2>
-          <div className="">
+        <div className=" w-full h-fit px-4 flex justify-start items-end" >
+          <div>
             <Link to={"/news"} className=" w-full">
             <button className="btn btn-primary w-fit mt-4 text-white">Read More</button>
             </Link>

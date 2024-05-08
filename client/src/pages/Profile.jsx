@@ -8,6 +8,7 @@ import {
 } from "firebase/storage";
 import app from "../../firebase";
 import { useEditUser } from "../hooks/useEditUser";
+import { useGetAllUserOrders } from "../hooks/useGetUserOrders";
 
 const Profile = () => {
   const { authUser } = useAuthContext();
@@ -15,6 +16,15 @@ const Profile = () => {
   const [file, setfile] = useState(null);
   const [fileUploadPerc, setfileUploadPerc] = useState(0);
   const [uploadError, setuploadError] = useState(null);
+  const { orders, getAllUserOrders } = useGetAllUserOrders();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await getAllUserOrders(authUser._id)
+    }
+    fetchData()
+  }, [orders])
+  
 
   const [formData, setformData] = useState({
   });
@@ -24,7 +34,6 @@ const Profile = () => {
         ...formData, [e.target.id]: e.target.value
       })
     }
-  
 
   useEffect(() => {
     if (file) {
@@ -175,9 +184,29 @@ const Profile = () => {
         </div>
       </div>
 
-      <div className="w-full min-h-fit px-2 py-5">
+      <div className="w-full min-h-fit px-2 py-5 overflow-x-auto">
         <h1 className="my-2 uppercase font-bold text-xl">
-          Orders History And Ratings --{" "}
+          Orders History --{" "}
+          <table className=" w-full my-2">
+            <thead>
+              <tr className=" text-sm">
+                <th>Order Id</th>
+                <th>Payment Id</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              {orders?.length > 0 ? orders.map((order) => (
+                <tr key={order._id} className=" text-xs">
+                  <td>{order.orderid}</td>
+                  <td>{order.paymentid}</td>
+                  <td>{order.amount}</td>
+                </tr>
+              )) : <tr>
+                  <td colSpan={3}>No Previous Orders</td>
+                </tr>}
+            </tbody>
+          </table>
         </h1>
       </div>
     </section>
