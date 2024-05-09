@@ -18,7 +18,7 @@ export const useEditUser = () => {
       setloading(true);
       try {
         const res = await axios.put(
-          `http://localhost:3000/api/users/user/${id}`, formData
+          `/api/users/user/${id}`, formData
         );
 
         if (res.data.success === false) {

@@ -12,7 +12,7 @@ export const useRegister = () => {
         
         setloading(true)
         try {
-            const res = await axios.post("http://localhost:3000/api/auth/register", formData)
+            const res = await axios.post("/api/auth/register", formData)
             
             if (res.success === false) {
                 seterror(res.response.data.message)

@@ -12,7 +12,7 @@ export const useSendMessage = () => {
         
         setloading(true)
         try {
-            const res = await axios.post("http://localhost:3000/api/contact/sendmessage", formData)
+            const res = await axios.post("/api/contact/sendmessage", formData)
             
             if (res.success === false) {
                 seterror(res.response.data.message)

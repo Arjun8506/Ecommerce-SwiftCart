@@ -12,7 +12,7 @@ export const useCreateProduct = () => {
         
         setloading(true)
         try {
-            const res = await axios.post("http://localhost:3000/api/product/create", formData)
+            const res = await axios.post("/api/product/create", formData)
 
             console.log(res);
             

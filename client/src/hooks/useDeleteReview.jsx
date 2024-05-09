@@ -14,7 +14,7 @@ export const useDeleteReview = () => {
         if (confirmed) {
             setloading(true)
             try {
-                const res = await axios.delete(`http://localhost:3000/api/reviews/review/${id}`)
+                const res = await axios.delete(`/api/reviews/review/${id}`)
                 
                 if (res.data.success === false) {
                     seterror(res.response.data.message)

@@ -16,8 +16,6 @@ const AdminReviewsPage = () => {
     fetchData();
   }, []);
 
-  console.log(reviews);
-
   const columns = React.useMemo(
     () => [
       { Header: "User Name", accessor: row => row.userId.fullname },

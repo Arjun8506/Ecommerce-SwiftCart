@@ -31,6 +31,7 @@ const CreateProduct = () => {
   const [files, setfiles] = useState([]);
   const fileref = useRef();
   const [imageURLs, setimageURLs] = useState([]);
+  const [uploadPerc, setuploadPerc] = useState(0)
 
   const [formData, setformData] = useState({
     name: "",
@@ -69,7 +70,7 @@ const CreateProduct = () => {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log(progress);
+          setuploadPerc(Math.round(progress))
         },
         (error) => {
           setloading(false);
@@ -211,7 +212,7 @@ const CreateProduct = () => {
               <FaPlus /> Choose Products Images
             </div>
           </div>
-
+            {uploadPerc ? <p className=" text-center text-green-500 font-bold">Image Uploaed {uploadPerc}%</p> : ""}
           <button
             onClick={handleImageSubmit}
             type="button"

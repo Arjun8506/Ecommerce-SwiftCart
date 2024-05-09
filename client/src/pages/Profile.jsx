@@ -72,7 +72,6 @@ const Profile = () => {
   const { loading, error, editUser } = useEditUser();
   const handleUserUpdate = async (e) => {
     e.preventDefault();
-    console.log(formData);
     await editUser(authUser._id, formData);
   };
 

@@ -11,7 +11,7 @@ export const useGetSpecificUser = () => {
 
             setloading(true)
             try {
-                const res = await axios.get(`http://localhost:3000/api/users/user/${id}`)
+                const res = await axios.get(`/api/users/user/${id}`)
                 
                 if (res.data.success === false) {
                     seterror(res.response.data.message)

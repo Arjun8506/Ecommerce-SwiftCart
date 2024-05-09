@@ -12,7 +12,7 @@ export const useCreateNews = () => {
         
         setloading(true)
         try {
-            const res = await axios.post("http://localhost:3000/api/news/createnews", formData)
+            const res = await axios.post("/api/news/createnews", formData)
             
             if (res.data.success === false) {
                 seterror(res.response.data.message)

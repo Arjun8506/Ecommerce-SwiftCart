@@ -10,7 +10,7 @@ export const useSendReview = () => {
         
         setloading(true)
         try {
-            const res = await axios.post("http://localhost:3000/api/reviews/send", formData)
+            const res = await axios.post("/api/reviews/send", formData)
             
             if (res.success === false) {
                 seterror(res.response.data.message)

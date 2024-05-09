@@ -12,7 +12,7 @@ export const useGetAllUsers = () => {
         
         setloading(true)
         try {
-            const res = await axios.get("http://localhost:3000/api/users/allusers")
+            const res = await axios.get("/api/users/allusers")
             
             if (res.data.success === false) {
                 seterror(res.response.data.message)

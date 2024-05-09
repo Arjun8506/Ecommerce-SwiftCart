@@ -11,7 +11,7 @@ export const useGetProductReviews = () => {
         
         setloading(true)
         try {
-            const res = await axios.get(`http://localhost:3000/api/reviews/productreviews/${id}`)
+            const res = await axios.get(`/api/reviews/productreviews/${id}`)
             
             if (res.data.success === false) {
                 seterror(res.response.data.message)

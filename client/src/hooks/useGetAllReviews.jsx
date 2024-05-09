@@ -11,7 +11,7 @@ export const useGetAllReviews = () => {
         
         setloading(true)
         try {
-            const res = await axios.get("http://localhost:3000/api/reviews/allreviews")
+            const res = await axios.get("/api/reviews/allreviews")
             
             if (res.data.success === false) {
                 seterror(res.response.data.message)

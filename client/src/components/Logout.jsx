@@ -12,7 +12,7 @@ const Logout = () => {
 
   const handleLogout = async () => {
     try {
-      const res = await axios.post("http://localhost:3000/api/auth/logout");
+      const res = await axios.post("/api/auth/logout");
 
       if (res.data.success === false) {
         seterror(res.message);

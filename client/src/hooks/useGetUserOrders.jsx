@@ -11,7 +11,7 @@ export const useGetAllUserOrders = () => {
         
         setloading(true)
         try {
-            const res = await axios.get(`http://localhost:3000/api/orders/order/${id}`)
+            const res = await axios.get(`/api/orders/order/${id}`)
             
             if (res.data.success === false) {
                 seterror(res.response.data.message)

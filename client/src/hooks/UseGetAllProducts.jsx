@@ -11,7 +11,7 @@ export const useGetAllProducts = () => {
         
         setloading(true)
         try {
-            const res = await axios.get("http://localhost:3000/api/product/allproducts")
+            const res = await axios.get("/api/product/allproducts")
             
             if (res.data.success === false) {
                 seterror(res.response.data.message)

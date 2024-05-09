@@ -11,7 +11,7 @@ export const useGetAllNews = () => {
         
         setloading(true)
         try {
-            const res = await axios.get("http://localhost:3000/api/news/allnews")
+            const res = await axios.get("/api/news/allnews")
             
             if (res.data.success === false) {
                 seterror(res.response.data.message)

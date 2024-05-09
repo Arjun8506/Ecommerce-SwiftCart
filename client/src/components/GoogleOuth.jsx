@@ -24,7 +24,7 @@ const GoogleOuth = () => {
         profilePic: result.user.photoURL,
       };
 
-      const res = await axios.post("http://localhost:3000/api/auth/google", formData);
+      const res = await axios.post("/api/auth/google", formData);
 
       if (res.data.success === false) {
           seterror(res.response.data.message);

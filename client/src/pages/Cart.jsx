@@ -25,7 +25,7 @@ const Cart = () => {
 
       console.log(body);
 
-      const res = await axios.post("http://localhost:3000/api/payment/paynow", body)
+      const res = await axios.post("/api/payment/paynow", body)
 
       const order = res.data.order
 
@@ -39,7 +39,7 @@ const Cart = () => {
         order_id: order.id,
         handler: async function (response){
             const body = {...response, totalAmount: totalAmount}
-            const res = await axios.post(`http://localhost:3000/api/payment/paymentverification/${authUser?._id}`, body)
+            const res = await axios.post(`/api/payment/paymentverification/${authUser?._id}`, body)
             if (res.data.success === true) {
               localStorage.removeItem("cart")
               setloading(false)
