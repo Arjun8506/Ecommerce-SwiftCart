@@ -18,7 +18,7 @@ const Home = () => {
       <HeroSection />
       <Products />
 
-      <div className="w-full h-64 shadow-xl flex items-center justify-center rounded-none bg-center bg-cover bg-no-repeat mb-5"
+      <div className="w-full h-64 shadow-xl flex items-center justify-center rounded-none bg-center bg-cover bg-no-repeat"
       style={{backgroundImage: `url(${news[0]?.image})` }}
       >
         <div className=" w-full h-fit px-4 flex justify-start items-end" >
