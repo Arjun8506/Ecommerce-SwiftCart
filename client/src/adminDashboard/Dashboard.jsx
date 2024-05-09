@@ -6,6 +6,8 @@ import { useCountContext } from "../context/CountContext";
 import { useGetAllUsers } from "../hooks/useAllUsers";
 import { useGetAllProducts } from "../hooks/UseGetAllProducts";
 import { useGetAllOrders } from "../hooks/useGetAllOrders";
+import OrdersChart from "../components/OrdersChart";
+import UsersChart from "../components/UsersChart";
 
 const Dashboard = () => {
   const { authUser } = useAuthContext();
@@ -49,26 +51,32 @@ const Dashboard = () => {
             <h1>Total Sale Amount : </h1>
             <p>₨ {totalSaleAmount}</p>
           </div>
-          <div className="w-full h-fit flex items-center justify-around py-4 px-5">
+          <div className="w-full h-fit grid grid-cols-3 gap-2 py-4 px-5">
             <Link to={"/admin/products"}>
-              <div className="w-20 h-20 bg-purple-500 hover:bg-cyan-600 text-white rounded-full flex flex-col items-center justify-center transition-all ease-in-out">
+              <div className="w-full bg-green-500 hover:opacity-50 text-white rounded-lg flex flex-col items-center justify-center transition-all ease-in-out py-5 text-lg">
                 <h2>Products</h2>
                 <h2>{count?.product}</h2>
               </div>
             </Link>
             <Link to={"/admin/users"}>
-              <div className="w-20 h-20 bg-purple-500 hover:bg-cyan-600 text-white rounded-full flex flex-col items-center justify-center transition-all ease-in-out">
+              <div className="w-full bg-yellow-500 hover:opacity-50 text-white rounded-lg flex flex-col items-center justify-center transition-all ease-in-out py-5 text-lg">
                 <h2>Users</h2>
                 <h2>{count?.user}</h2>
               </div>
             </Link>
             <Link to={"/admin/orders"}>
-              <div className="w-20 h-20 bg-purple-500 hover:bg-cyan-600 text-white rounded-full flex flex-col items-center justify-center transition-all ease-in-out">
+              <div className="w-full bg-blue-500 hover:opacity-50 text-white rounded-lg flex flex-col items-center justify-center transition-all ease-in-out py-5 text-lg">
                 <h2>Orders</h2>
                 <h2>{count?.order}</h2>
               </div>
             </Link>
           </div>
+
+          <div className=" w-full min-h-screen grid grid-cols-1 lg:grid-cols-2 gap-5">
+            <OrdersChart ordersData={orders} />
+            <UsersChart usersData={users} />
+          </div>
+
         </div>
       </div>
     </section>

@@ -18,8 +18,8 @@ const AdminReviewsPage = () => {
 
   const columns = React.useMemo(
     () => [
-      { Header: "User Name", accessor: row => row.userId.fullname },
-      { Header: "Product Name", accessor: row => row.productId.name },
+      { Header: "User Name", accessor: row => row.userId?.fullname },
+      { Header: "Product Name", accessor: row => row.productId?.name },
       { Header: "Rating", accessor: "ratings" },
       { Header: "comment", accessor: "comment" },
       {

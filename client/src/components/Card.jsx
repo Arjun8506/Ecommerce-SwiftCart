@@ -70,7 +70,7 @@ const Card = ({ product }) => {
           </button>
           ) : <button
           className="p-2 w-full text-white bg-orange-600 rounded-lg hover:opacity-80 mx-auto text-sm font-bold"
-          onClick={() => alert("Fisrt Login")}
+          onClick={() => alert("First Login")}
         >
           Add To Cart
         </button>}
